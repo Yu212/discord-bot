@@ -27,8 +27,10 @@ class CalcCommand: Command() {
             val pressed = e.button!!.label
             val expr = if (lastPressed == null) "" else e.message.contentRaw
             if (pressed == "=") {
+                val result = kotlin.runCatching { calculate(expr) }
+                        .getOrDefault("エラーが発生しました")
                 e.deferEdit()
-                        .setContent("$expr=${calculate(expr)}")
+                        .setContent("$expr=${result}")
                         .setActionRows()
                         .queue()
                 return@waitForButtonClickEvent true
