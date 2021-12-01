@@ -28,7 +28,7 @@ tasks.withType<KotlinCompile> {
 }
 
 tasks.withType<ShadowJar> {
-    archiveFileName.set("discort-bot.jar")
+    archiveFileName.set("discord-bot.jar")
 }
 
 application {
