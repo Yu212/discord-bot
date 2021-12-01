@@ -32,5 +32,5 @@ tasks.withType<ShadowJar> {
 }
 
 application {
-    mainClass.set("MainKt")
+    mainClass.set("com.yu212.MainKt")
 }
