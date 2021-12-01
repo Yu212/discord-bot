@@ -11,7 +11,7 @@ lateinit var jda: JDA
 lateinit var debugGuild: Guild
 
 fun main(args: Array<String>) {
-    val token = args[0]
+    val token = System.getenv("DISCORD_BOT_TOKEN") ?: args[0]
     jda = JDABuilder.createDefault(token)
             .addEventListeners(EventWaiter)
             .build()
