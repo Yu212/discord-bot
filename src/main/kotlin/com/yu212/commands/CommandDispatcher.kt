@@ -10,14 +10,14 @@ class CommandDispatcher: ListenerAdapter() {
 
     init {
         jda.addEventListener(this)
-//        jda.updateCommands().queue()
+        jda.updateCommands().queue()
         debugGuild.updateCommands().queue()
     }
 
     fun register(command: Command) {
-//        jda.upsertCommand(command.data).queue {
-//            commandMap[it.idLong] = command
-//        }
+        jda.upsertCommand(command.data).queue {
+            commandMap[it.idLong] = command
+        }
         debugGuild.upsertCommand(command.data).queue {
             commandMap[it.idLong] = command
         }
