@@ -3,19 +3,19 @@ package com.yu212.commands
 import com.yu212.EventWaiter
 import com.yu212.Id
 import net.dv8tion.jda.api.MessageBuilder
-import net.dv8tion.jda.api.events.interaction.SlashCommandEvent
+import net.dv8tion.jda.api.events.interaction.command.SlashCommandInteractionEvent
 import net.dv8tion.jda.api.interactions.commands.build.CommandData
 import net.dv8tion.jda.api.interactions.components.ActionRow
-import net.dv8tion.jda.api.interactions.components.Button
-import java.lang.AssertionError
+import net.dv8tion.jda.api.interactions.components.buttons.Button
+import net.dv8tion.jda.internal.interactions.CommandDataImpl
 import java.math.BigInteger
 
 class CalcCommand: Command() {
     override val data: CommandData by lazy {
-        CommandData("calc", "description")
+        CommandDataImpl("calc", "description")
     }
 
-    override fun execute(event: SlashCommandEvent) {
+    override fun execute(event: SlashCommandInteractionEvent) {
         event.deferReply(true).queue()
         val message = event.hook.sendMessage(MessageBuilder()
                 .setContent("press any button...")
@@ -24,7 +24,7 @@ class CalcCommand: Command() {
                 .complete()
         var lastPressed: String? = null
         EventWaiter.waitForButtonClickEvent(message.idLong) { e ->
-            val pressed = e.button!!.label
+            val pressed = e.button.label
             val expr = if (lastPressed == null) "" else e.message.contentRaw
             if (pressed == "=") {
                 val content = kotlin.runCatching { calculate(expr) }

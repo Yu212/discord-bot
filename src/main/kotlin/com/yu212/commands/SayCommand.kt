@@ -1,16 +1,17 @@
 package com.yu212.commands
 
-import net.dv8tion.jda.api.events.interaction.SlashCommandEvent
+import net.dv8tion.jda.api.events.interaction.command.SlashCommandInteractionEvent
 import net.dv8tion.jda.api.interactions.commands.OptionType
 import net.dv8tion.jda.api.interactions.commands.build.CommandData
+import net.dv8tion.jda.internal.interactions.CommandDataImpl
 
 class SayCommand: Command() {
     override val data: CommandData by lazy {
-        CommandData("say", "description")
+        CommandDataImpl("say", "description")
                 .addOption(OptionType.STRING, "message", "message to say", true)
     }
 
-    override fun execute(event: SlashCommandEvent) {
+    override fun execute(event: SlashCommandInteractionEvent) {
         val message = event.getOption("message")!!.asString
         event.deferReply(true).queue()
         event.channel.sendMessage(message).queue {

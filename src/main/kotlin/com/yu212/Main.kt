@@ -11,13 +11,12 @@ lateinit var jda: JDA
 lateinit var debugGuild: Guild
 
 fun main(args: Array<String>) {
-    val token = System.getenv("DISCORD_BOT_TOKEN") ?: args[0]
+    val token = args[0]
     jda = JDABuilder.createDefault(token)
             .addEventListeners(EventWaiter)
             .build()
             .awaitReady()
-    debugGuild = jda.getGuildById(680339070777425941)!!
-//    debugGuild = jda.getGuildById(444134366411489281)!!
+    debugGuild = jda.getGuildById(444134366411489281)!!
     CommandDispatcher().run {
         register(CalcCommand())
         register(SayCommand())

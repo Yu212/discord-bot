@@ -2,7 +2,7 @@ package com.yu212.commands
 
 import com.yu212.debugGuild
 import com.yu212.jda
-import net.dv8tion.jda.api.events.interaction.SlashCommandEvent
+import net.dv8tion.jda.api.events.interaction.command.SlashCommandInteractionEvent
 import net.dv8tion.jda.api.hooks.ListenerAdapter
 
 class CommandDispatcher: ListenerAdapter() {
@@ -23,7 +23,7 @@ class CommandDispatcher: ListenerAdapter() {
         }
     }
 
-    override fun onSlashCommand(event: SlashCommandEvent) {
+    override fun onSlashCommandInteraction(event: SlashCommandInteractionEvent) {
         val commandId = event.commandIdLong
         commandMap[commandId]?.execute(event)
     }
